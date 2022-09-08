@@ -10,7 +10,7 @@ Is taking input from molpro, runs calculations then churns out molpro compatible
 7. compare dm-s 
 8. run inversion, compare results 
 
-#TODO -two 
+# TODO -two 
 1. get large orbital matrix
 2. run from large dump 
 3. repeat steps 3 to 8 
