@@ -30,7 +30,6 @@ print(pyscf.__version__)
 myhf = tools.fcidump.to_scf('fcidump', molpro_orbsym=False, mf=None)
 print(f"myhf.mo_occ")
 myhf.run()
-print(myhf.mo_coeff)
 
 
 debug = False
@@ -60,6 +59,16 @@ if debug:
 nelec_a = 2
 nelec_b = 2
 dm1 = cisolver.make_rdm1(fcivec, norb, (nelec_a,nelec_b))
-print(dm1)
-write_matrop('dm.txt',dm1)
+orbitals = read_orbitals('Test_File')
+dm_molpro = np.matmul(np.matmul(orbitals,dm1), orbitals.transpose())
+
+
+debug = True 
+if debug:
+    print("Density Matrix From PySCF")
+    print(dm1)
+    print("Density Matrix From Molpro")
+    print(dm_molpro)
+
+write_matrop('dm.txt',dm_molpro)
 
