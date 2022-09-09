@@ -7,7 +7,7 @@ Is taking input from molpro, runs calculations then churns out molpro compatible
 - [x] use other function to transform
 - [x] use special print to print to dm
 - [ ] paste special into heck-mack
-- [ ] compare dm-s 
+- [x] compare dm-s 
 - [ ] run inversion, compare results 
 - 
 # TODO - three 
