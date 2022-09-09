@@ -6,34 +6,6 @@
 A Script that reads an fcidump file, runs scf, runs FCI, then returns a density matrix compatible with molpro
 '''
 
-def write_matrop(fname, mat):
-    mat = mat.reshape(-1)
-    new_dim = int(sqrt(mat.shape[0]))
-    mat = mat.reshape(new_dim,new_dim)
-    mat2 = np.triu(mat)
-    print(mat)
-    vector = mat[0,0]
-    for i in range(1,new_dim):
-        print(vector)
-        print(mat[:i,i])
-        vector = np.append(vector, mat[:i+1,i])
-    for i in range(0,len(vector),3):
-            print(i)
-    #print(len(vector))
-    with open(fname, 'w') as fin:
-        fin.write('BEGIN_DATA,\n')
-        if (len(vector)%3==0):
-            for i in range(0,len(vector),3):
-                fin.write("%25.15f, %25.15f, %25.15f,\n"%(vector[i], vector[i+1], vector[i+2]))
-        if (len(vector)%3==1):
-            for i in range(0,len(vector)-3,3):
-                fin.write("%25.15f, %25.15f, %25.15f,\n"%(vector[i], vector[i+1], vector[i+2]))
-            fin.write("%25.15f,\n"%vector[-1])
-        if (len(vector)%3==2):
-            for i in range(0,len(vector)-3,3):
-                fin.write("%25.15f, %25.15f, %25.15f,\n"%(vector[i], vector[i+1], vector[i+2]))
-            fin.write("%25.15f, %25.15f,\n"%vector[-2], vector[-1])
-        fin.write('END_DATA,\n')
 
 
 import psutil
@@ -41,6 +13,7 @@ import pyscf
 from math import sqrt
 from pyscf import tools
 from pyscf import __config__
+from utils import write_matrop, read_orbitals 
 import numpy as np
 
 MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
