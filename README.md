@@ -2,20 +2,20 @@
 Is taking input from molpro, runs calculations then churns out molpro compatible data. At this point density matrices.
 
 # TODO - two
-[x] run from small fcidump
-[] use read to get orbitals
-[] use other function to transform
-[] use special print to print to dm
-[] paste special into heck-mack
-[] compare dm-s 
-[] run inversion, compare results 
-
+- [x] run from small fcidump
+- [] use read to get orbitals
+- [] use other function to transform
+- [] use special print to print to dm
+- [] paste special into heck-mack
+- [] compare dm-s 
+- [] run inversion, compare results 
+- 
 # TODO - three 
-[] get large orbital matrix
-[] run from large dump 
-[] repeat steps 3 to 8 
+- [] get large orbital matrix
+- [] run from large dump 
+- [] repeat steps 3 to 8 
 
 # TODO - meta 
-[] consider a way to print most of the heck-mack data 
-[] find a way to print spin matrices
-[] write other function to transform 
+- [] consider a way to print most of the heck-mack data 
+- [] find a way to print spin matrices
+- [] write other function to transform 
