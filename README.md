@@ -18,4 +18,5 @@ Is taking input from molpro, runs calculations then churns out molpro compatible
 # TODO - meta 
 - [ ] consider a way to print most of the heck-mack data 
 - [ ] find a way to print spin matrices
-- [x] write other function to transform 
+- [x] write other function to transform
+

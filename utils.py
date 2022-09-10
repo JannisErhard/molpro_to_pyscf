@@ -17,20 +17,11 @@ def read_orbitals(filename):
 
 
 
-def write_matrop(fname, mat):
-    mat = mat.reshape(-1)
-    new_dim = int(sqrt(mat.shape[0]))
-    mat = mat.reshape(new_dim,new_dim)
+def write_matrop(fname, mat, new_dim):
     mat2 = np.triu(mat)
-    print(mat)
     vector = mat[0,0]
     for i in range(1,new_dim):
-        print(vector)
-        print(mat[:i,i])
         vector = np.append(vector, mat[:i+1,i])
-    for i in range(0,len(vector),3):
-            print(i)
-    #print(len(vector))
     with open(fname, 'w') as fin:
         fin.write('BEGIN_DATA,\n')
         if (len(vector)%3==0):
@@ -46,7 +37,3 @@ def write_matrop(fname, mat):
             fin.write("%25.15f, %25.15f,\n"%vector[-2], vector[-1])
         fin.write('END_DATA,\n')
 
-
-#filename = sys.argv[1]
-#orbitals = read_orbitals(filename)
-#print(orbitals)

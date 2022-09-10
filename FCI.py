@@ -70,5 +70,5 @@ if debug:
     print("Density Matrix From Molpro")
     print(dm_molpro)
 
-write_matrop('dm.txt',dm_molpro)
+write_matrop('dm.txt',dm_molpro, norb)
 
