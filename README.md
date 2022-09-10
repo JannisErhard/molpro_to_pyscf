@@ -13,7 +13,9 @@ This will generate twi files. One called fcidump and one called orb.dat.
 
 Now use this script in the following way:
 
-...
+```python
+ python3 FCI.py -rf Test_1/orb.dat -ff Test_1/fcidump -of Test_1/dm_2.dat
+```
 
 This will generate a density matrix that is compatible with molpro frmo a PySCF FCI calulation.
 
