@@ -8,13 +8,11 @@ A Script that reads an fcidump file, runs scf, runs FCI, then returns a density 
 
 
 
-import psutil
 import pyscf
-from math import sqrt
+import numpy as np
 from pyscf import tools
 from pyscf import __config__
 from utils import write_matrop, read_orbitals 
-import numpy as np
 
 MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
 print(MAX_MEMORY)
@@ -32,9 +30,9 @@ print(f"myhf.mo_occ")
 myhf.run()
 
 
-debug = False
+DEBUG = False
 
-if debug:
+if DEBUG:
     dm = myhf.make_rdm1()
     print("This is the HF DM")
     print(dm)
@@ -50,21 +48,27 @@ print(f"E={e}")
 
 norb = myhf.mo_coeff.shape[1]
 
-if debug:
+if DEBUG:
     # show contents of scf object
     for element in dir(myhf):
         print(element, getattr(myhf,element))
 
+if DEBUG:
+    for element in dir(myhf.mol):
+        print(element, getattr(myhf.mol, element))
+
 # 6 alpha electrons, 4 beta electrons because spin = nelec_a-nelec_b = 2
-nelec_a = 2
-nelec_b = 2
-dm1 = cisolver.make_rdm1(fcivec, norb, (nelec_a,nelec_b))
+dm1 = cisolver.make_rdm1(fcivec, myhf.mo_coeff.shape[0], myhf.mol.nelec)
 orbitals = read_orbitals('Test_File')
 dm_molpro = np.matmul(np.matmul(orbitals,dm1), orbitals.transpose())
 
+DEBUG = False  
+if DEBUG:
+    maybe = cisolver.__dict__['mol']
+    for element in dir(maybe):
+        print(element, getattr(maybe,element))
 
-debug = True 
-if debug:
+if DEBUG:
     print("Density Matrix From PySCF")
     print(dm1)
     print("Density Matrix From Molpro")

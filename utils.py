@@ -1,7 +1,5 @@
 #!/bin/python3
-import sys
 import numpy as np
-from math import sqrt
 def read_orbitals(filename):
     with open(filename) as f:
         lines = f.readlines()
@@ -18,7 +16,6 @@ def read_orbitals(filename):
 
 
 def write_matrop(fname, mat, new_dim):
-    mat2 = np.triu(mat)
     vector = mat[0,0]
     for i in range(1,new_dim):
         vector = np.append(vector, mat[:i+1,i])
