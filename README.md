@@ -5,9 +5,11 @@ Is taking input from molpro, runs calculations then churns out molpro compatible
 
 First run molpro for your setup with input akin to this:
 
+```
 {hf; orbital,2100.2}
 {matrop; load,orb; export,orb,orb.dat,status=rewind,prec=sci}
 {FCI,dump=fcidump;core}
+```
 
 This will generate twi files. One called fcidump and one called orb.dat.
 
