@@ -32,7 +32,7 @@ def write_matrop(fname, mat, new_dim):
             fin.write("%25.15f, %25.15f,\n"%vector[-2], vector[-1])
         fin.write('END_DATA,\n')
 
-def read_orbitals_complex(filename, norbs):
+def read_orbitals_from_record(filename, norbs):
     with open(filename) as f:
         lines = f.readlines()
     words = []
