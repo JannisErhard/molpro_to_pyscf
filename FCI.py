@@ -12,7 +12,7 @@ import pyscf
 import numpy as np
 from pyscf import tools
 from pyscf import __config__
-from utils import write_matrop, read_orbitals 
+from utils import write_matrop, read_orbitals, read_orbitals_complex
 
 MAX_MEMORY = getattr(__config__, 'MAX_MEMORY')
 print(MAX_MEMORY)
@@ -23,7 +23,7 @@ print(pyscf.__file__)
 print(pyscf.__version__)
 
 
-test='Test_1/'
+test='Test_2/'
 
 # read integrals from fcidumpfile which generates SCF object,  then generate orbitals by executing run method which updates SCF object
 myhf = tools.fcidump.to_scf(test+'fcidump', molpro_orbsym=False, mf=None)
@@ -33,13 +33,19 @@ myhf.run()
 # create a cisolver object based on the SCF object an execute the CI algorithm
 cisolver = pyscf.fci.FCI(myhf)
 cisolver.conv_tol = 1e-9
-e, fcivec = cisolver.kernel(verbose=5)
+e, fcivec = cisolver.kernel()
 
 
 
 # 
 dm1 = cisolver.make_rdm1(fcivec, myhf.mo_coeff.shape[0], myhf.mol.nelec)
-orbitals = read_orbitals(test+'orbfile',myhf.mo_coeff.shape[0])
+#orbitals = read_orbitals(test+'orbfile',myhf.mo_coeff.shape[0])
+orbitals = read_orbitals_complex(test+'orb.dat',myhf.mo_coeff.shape[0])
+
+orbitals.astype(np.float32)
+dm1.astype(np.float32)
+
+
 dm_molpro = np.matmul(np.matmul(orbitals,dm1), orbitals.transpose())
 
 print(f"E={e}")

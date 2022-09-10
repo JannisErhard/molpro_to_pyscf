@@ -19,6 +19,7 @@ Is taking input from molpro, runs calculations then churns out molpro compatible
 - [ ] consider a way to print most of the heck-mack data 
 - [ ] find a way to print spin matrices
 - [x] write other function to transform
+- [x] write function to read generic molpro record file to get orbitals
 
 # Tests
 1. Be sto3g 

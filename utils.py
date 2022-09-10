@@ -32,3 +32,15 @@ def write_matrop(fname, mat, new_dim):
             fin.write("%25.15f, %25.15f,\n"%vector[-2], vector[-1])
         fin.write('END_DATA,\n')
 
+def read_orbitals_complex(filename, norbs):
+    with open(filename) as f:
+        lines = f.readlines()
+    words = []
+    for line in lines:
+        line.replace('D+','E+')
+        for word in line.replace(',','').replace('D+','E+').replace('D-','E-').split():
+            words.append(word)
+    start = words.index("ORBITALS")+7
+    end = words.index('EIG')
+    orbitals = np.reshape(np.array(words[start:end]), (norbs, norbs)).astype(float).transpose()
+    return orbitals
